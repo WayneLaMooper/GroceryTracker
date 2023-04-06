@@ -4,9 +4,9 @@
 
 <!DOCTYPE html>
 <html lang="en">
+<link rel="stylesheet" href="index.css" />
 
 <head>
-    <link rel="stylesheet" href="index.css" />
     <title>Welcome to Grocery Tracker!</title>
 </head>
 
