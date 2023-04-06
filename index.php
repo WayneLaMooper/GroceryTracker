@@ -13,10 +13,12 @@ $_SESSION;
 </head>
 
 <body>
-  <img src="images/download.jpg" />
-  <p class="username">@Mooper</p>
-  <p>I love yoooou! boop</p>
-  <p> hello again</p>
+
+  <a href="logout.php">Logout</a>
+  <h1>This is the index page </h1>
+
+  <br>
+  Hello Username.
 </body>
 
 </html>
