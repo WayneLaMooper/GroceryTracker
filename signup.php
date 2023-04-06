@@ -43,11 +43,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <img src="images/loginPic.jpg" alt="Fruits and Vegetables">
         <form method="post">
             <div>Welcome to Grocery Tracker Signup!</div>
+            <br>
             <div>Username:</div>
             <input type="text" name="username"><br>
+            <br>
             <div>Password:</div>
             <input type="password" name="password"><br>
+            <br>
             <input type="submit" value="Signup"><br>
+            <br>
             <a href="login.php">Click to Login</a>
         </form>
     </div>
