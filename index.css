@@ -13,7 +13,7 @@ body {
 
 .box, form {
     border-radius: 25px;
-    background-color: green;
+    border: 2px solid #73AD21;
     padding: 20px; 
     height: 150px;
     width: 200px;
