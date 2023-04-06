@@ -4,7 +4,7 @@ function check_login($con)
 {
     if (isset($_SESSION['user_id'])) {
         $id = $_SESSION['user_id'];
-        $query = "select * from user_account where user_id = '$id' limit 1";
+        $query = "select * from user_account where account_ID = '$id' limit 1";
 
         $result = mysqli_query($con, $query);
         if ($result && mysqli_num_rows($result) > 0) {
@@ -12,7 +12,6 @@ function check_login($con)
             return $user_data;
         }
     }
-
     //Redirect to login
     header("Location: login.php");
     die;

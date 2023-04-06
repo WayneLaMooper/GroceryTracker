@@ -5,7 +5,7 @@ include("connection.php");
 include("functions.php");
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $user_name = $_POST['user_name'];
+    $user_name = $_POST['username'];
     $password = $_POST['password'];
 
     if (!empty($user_name) && !empty($password)) {
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <form method="post">
             <div>Welcome to Grocery Tracker Signup!</div>
             <div>Username:</div>
-            <input type="text" name="user_name"><br>
+            <input type="text" name="username"><br>
             <div>Password:</div>
             <input type="password" name="password"><br>
             <input type="submit" value="Signup"><br>
