@@ -19,7 +19,7 @@
             <div>Password:</div>
             <input type="password" name="password"><br>
             <input type="submit" value="Login"><br>
-            <a href="signup.php">Signup</a>
+            <a href="signup.php">Click to Signup</a>
         </form>
     </div>
 
