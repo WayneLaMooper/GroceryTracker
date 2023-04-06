@@ -1,6 +1,22 @@
+
 body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    height: 100vh;
+
     font-weight: bold;
     background-color: #333;
     color: whitesmoke;
 }
+
+.box, form {
+    border-radius: 25px;
+    background-color: green;
+    padding: 20px; 
+    height: 150px;
+    width: 200px;
+}
+
 
