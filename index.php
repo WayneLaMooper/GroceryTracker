@@ -6,10 +6,10 @@ $_SESSION;
 
 <!DOCTYPE html>
 <html lang="en">
+<link rel="stylesheet" href="index.css" />
 
 <head>
-  <link rel="stylesheet" href="index.css" />
-  <title>My first web page</title>
+  <title>Welcome to Grocery Tracker!</title>
 </head>
 
 <body>
