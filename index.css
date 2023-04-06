@@ -15,15 +15,15 @@ img {
     width: 200px;
     float: left;
     object-fit: cover;
-    border-radius: 25px;
+    border-radius: 25px 1px 1px 25px;
 }
 
 .box, form {
-    float: right;
-    border-radius: 25px;
+    float: right; 
+    border-radius: 1px 25px 25px 1px;
     background-color: #73AD21;
     padding: 20px; 
-    height: 257px;
+    height: 260px;
     width: 200px;
 }
 
