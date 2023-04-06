@@ -10,13 +10,20 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     if (!empty($user_name) && !empty($password)) {
         $user_id = random_num(20);
-        $query = "insert into user_account (account_ID, username, password) values ('$user_id', '$user_name', '$password')";
+        $queryName = "select * from user_account where username = '$user_name'";
+        $result = mysqli_query($con, $queryName);
 
-        mysqli_query($con, $query);
-        header("Location: login.php");
-        die;
+        if ($result && mysqli_num_rows($result) > 0) {
+            echo "Username taken, please try again.";
+        } else {
+            $query = "insert into user_account (account_ID, username, password) values ('$user_id', '$user_name', '$password')";
+
+            mysqli_query($con, $query);
+            header("Location: login.php");
+            die;
+        }
     } else {
-        echo "Please enter valid information";
+        echo "Empty entry, please try again.";
     }
 }
 
