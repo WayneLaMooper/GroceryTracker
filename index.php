@@ -7,8 +7,10 @@ $_SESSION;
 <!DOCTYPE html>
 <html lang="en">
 <link rel="stylesheet" href="index.css" />
+<link rel="icon" href="images/icon.jpg" type="image/x-icon">
 
 <head>
+  <meta charset="UTF-8">
   <title>Welcome to Grocery Tracker!</title>
 </head>
 
