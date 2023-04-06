@@ -40,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 <body>
     <div id="box">
+        <img src="images/loginPic.jpg" alt="Fruits and Vegetables">
         <form method="post">
             <div>Welcome to Grocery Tracker Signup!</div>
             <div>Username:</div>
