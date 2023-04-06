@@ -28,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 <head>
     <title>Welcome to Grocery Tracker!</title>
+    <link rel="icon" href="images/icon.jpg" type="image/x-icon">
 </head>
 
 <body>
