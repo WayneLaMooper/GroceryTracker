@@ -1,4 +1,3 @@
-
 body {
     display: flex;
     align-items: center;
@@ -9,6 +8,11 @@ body {
     font-weight: bold;
     background-color: #333;
     color: whitesmoke;
+}
+
+img {
+    height: 200px;
+    width: 200px;
 }
 
 .box, form {
