@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" href="index.css" />
+<link rel="stylesheet" href="logpages.css" />
 
 <head>
     <title>Welcome to Grocery Tracker!</title>
