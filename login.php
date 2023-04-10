@@ -58,6 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </form>
     </div>
 
+    <p id= "credits"> Made by Wayne La, Anson Sieu, and John Lugue &copy; </p>
+
 </body>
 
 </html>
