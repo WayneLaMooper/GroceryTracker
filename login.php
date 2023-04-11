@@ -12,19 +12,21 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $query = "select * from user_account where username = '$user_name' limit 1";
         $result = mysqli_query($con, $query);
 
-        if ($result) {
-            if ($result && mysqli_num_rows($result) > 0) {
-                $user_data = mysqli_fetch_assoc($result);
+        if ($result && mysqli_num_rows($result) > 0) {
+            $user_data = mysqli_fetch_assoc($result);
 
-                if ($user_data['password'] === $password) {
-                    $_SESSION['user_id'] = $user_data['account_ID'];
-                    header("Location: index.php");
-                    die;
-                }
+            if ($user_data['password'] === $password) {
+                $_SESSION['user_id'] = $user_data['account_ID'];
+                header("Location: index.php");
+                die;
+            } else {
+                echo "Incorrect username or password";
             }
+        } else {
+            echo "Incorrect username or password";
         }
     } else {
-        echo "Please enter valid information";
+        echo "Incorrect username or password";
     }
 }
 
@@ -58,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </form>
     </div>
 
-    <p id= "credits"> Made by Wayne La, Anson Sieu, and John Lugue &copy; </p>
+    <p id="credits"> Made by Wayne La, Anson Sieu, and John Lugue &copy; </p>
 
 </body>
 
