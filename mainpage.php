@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="mainpage.css">
+    <link rel="stylesheet" href="mainpage.css?v=<?php echo time(); ?>">
     <title>Grocery Tracker</title>
     <link rel="icon" href="images/icon.jpg" type="image/x-icon">
 </head>
@@ -25,18 +25,32 @@
 
     <!-- pictures on a gridlike fashion. click on image for a popup -->
     
-    <div class ="row">
-        <div class = "column">
+    <div class ="gallery">
+        <figure>
             <img src="images/apple.jpg">
+        </figure>
+            
+        <figure>
             <img src="images/orange.jpg">
-            <img src="images/banana.jpg">
-        </div>
+        </figure>
 
-        <div class = "column">
+        <figure>
+            <img src="images/banana.jpg">
+        </figure>
+
+        <figure>
             <img src="images/flour.jpg">
+        </figure>
+
+        <figure>
             <img src="images/eggs.jpg">
+        </figure>
+
+        <figure>
             <img src="images/butter.jpg">
-        </div>
+        </figure>
+
+
     </div>
 
 </body>
