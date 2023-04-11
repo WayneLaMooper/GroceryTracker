@@ -19,6 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $query = "insert into user_account (account_ID, username, password) values ('$user_id', '$user_name', '$password')";
 
             mysqli_query($con, $query);
+            $query = "insert into customer_acc (customer_ID) values ('$user_id')";
+            mysqli_query($con, $query);
             header("Location: login.php");
             die;
         }
@@ -56,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </form>
     </div>
 
-    <p id= "credits"> Made by Wayne La, Anson Sieu, and John Lugue &copy; </p>
+    <p id="credits"> Made by Wayne La, Anson Sieu, and John Lugue &copy; </p>
 
 </body>
 

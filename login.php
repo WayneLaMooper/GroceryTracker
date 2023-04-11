@@ -17,8 +17,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
             if ($user_data['password'] === $password) {
                 $_SESSION['user_id'] = $user_data['account_ID'];
-                header("Location: index.php");
-                die;
+                $query = "select * from customer_acc where customer_ID = $user_data[account_ID] limit 1";
+                $result = mysqli_query($con, $query);
+                if ($result && mysqli_num_rows($result) > 0) {
+                    header("Location: index.php");
+                    die;
+                } else {
+                    echo "Employee Account";
+                }
             } else {
                 echo "Incorrect username or password";
             }
