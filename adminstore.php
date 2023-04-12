@@ -120,6 +120,53 @@ $current_name = $store_info['store_name'];
         }
         ?>
     </div>
+    <div>
+        <h1>Departments:</h1>
+        <?php
+        $allDepartments = "select * from department";
+        $result = mysqli_query($con, $allDepartments);
+        if ($result && mysqli_num_rows($result) > 0) {
+            while ($department = mysqli_fetch_assoc($result)) {
+                echo $department['dept_name'] . " department managers: <br>";
+                $departQuery = "select * from manager_acc where dept_ID = $department[dept_ID]";
+                $deptmanager_result = mysqli_query($con, $departQuery);
+                while ($deptmanager_info = mysqli_fetch_assoc($deptmanager_result)) {
+                    $manQuery = "select username from user_account where account_ID = $deptmanager_info[adminm_account_ID]";
+                    $manager_result = mysqli_query($con, $manQuery);
+                    $manager_info = mysqli_fetch_assoc($manager_result);
+                    echo $manager_info['username'] . " " . $deptmanager_info['adminm_account_ID'] . "<br>";
+                }
+                echo "<br> Enter new " . $department['dept_name'] . " department manager ID below <br><form name='form' action='' method='post'>
+                <input type='text' name='new_m_ID'> <br>
+                <input type='submit' name='new_m_dept' value='" . $department['dept_name'] . "'><br></form>";
+            }
+        }
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            if (isset($_POST['new_m_ID'])) {
+                $new_manager_ID = $_POST['new_m_ID'];
+                $new_manager_dept = $_POST['new_m_dept'];
+
+                if (!empty($new_manager_ID) && !empty($new_manager_dept)) {
+                    $queryName = "select * from manager_acc where adminm_account_ID = '$new_manager_ID' and dept_ID is NULL";
+                    $result = mysqli_query($con, $queryName);
+
+                    if ($result && mysqli_num_rows($result) > 0) {
+                        $departmentQ = "select * from department where dept_name = '$new_manager_dept' and shop_location = '$current_store'";
+                        $curdept = mysqli_query($con, $departmentQ);
+                        $cur_deptinfo = mysqli_fetch_assoc($curdept);
+                        $newquery = "update manager_acc set dept_ID = $cur_deptinfo[dept_ID] where adminm_account_ID = '$new_manager_ID'";
+                        mysqli_query($con, $newquery);
+                        echo "Manager successfully added!";
+                    } else {
+                        echo "Manager is already apart of a department.";
+                    }
+                } else {
+                    echo "Empty entry, please try again.";
+                }
+            }
+        }
+        ?>
+    </div>
 </body>
 
 </html>
