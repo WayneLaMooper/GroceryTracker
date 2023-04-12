@@ -29,6 +29,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         header("Location: ownerindex.php");
                         die;
                     }
+                    $query = "select * from manager_acc where adminm_account_ID = $user_data[account_ID] limit 1";
+                    $result = mysqli_query($con, $query);
+                    if ($result && mysqli_num_rows($result) > 0) {
+                        header("Location: managerAcc.php");
+                        die;
+                    }
                 }
             } else {
                 echo "Incorrect username or password";
