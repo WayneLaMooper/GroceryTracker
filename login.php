@@ -65,16 +65,27 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <div>Password:</div>
             <input type="password" name="password"><br>
             <br>
+            <br>
             <input type="submit" value="Login"><br>
             <br>
-            <a href="signup.php">Click to Signup</a><br>
+
+            <!-- <a href="signup.php">Click to Signup</a><br>
             <br>
-            <a href="ownersignup.php">Click to Signup as Owner</a>
+            <a href="ownersignup.php">Click to Signup as Owner</a> -->
         </form>
     </div>
 
-    <p id="credits"> Made by Wayne La, Anson Sieu, and John Lugue &copy; </p>
+    <br>
+    <button class="signup-button" onclick="location.href='signup.php';">
+        Sign up
+    </button>
 
+    <br>
+
+    <button class="ownersignup-button" onclick="location.href='ownersignup.php';">
+        Sign up as Owner
+    </button>
+    <p id="credits"> Made by Wayne La, Anson Sieu, and John Lugue &copy; </p>
 </body>
 
 </html>
