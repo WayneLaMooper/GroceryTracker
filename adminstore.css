@@ -24,8 +24,24 @@ body{
 }
 
 .remove-dept-button{
-    background-color: red;
-    color: whitesmoke;
+    background-color: grey;
+    color: white;
+    height: 25px;
+    width: 100px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 13;
+    border-color: rgb(214, 56, 56);
+    border-width: 1px;
+    transition: background-color 0.5s;
+}
+
+.remove-dept-button:hover{
+    background-color: rgb(214, 56, 56);
+}
+.remove-dept-button:active{
+    background-color: rgb(161, 44, 44);
 }
 
 .divider{
