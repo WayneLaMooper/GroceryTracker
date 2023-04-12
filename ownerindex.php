@@ -6,6 +6,7 @@ include("connection.php");
 include("functions.php");
 
 $user_data = check_login($con);
+$current_store = '';
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $store_location = $_POST['Location'];
@@ -67,11 +68,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $result = mysqli_query($con, $allStores);
             if ($result && mysqli_num_rows($result) > 0) {
                 while ($store = mysqli_fetch_assoc($result)) {
-                    echo "<a href='ownerindex.php'>" . $store['store_name'], " ", $store['location'] . "</a><br>";
+                    echo "<button onclick='set_store()'>" . $store['store_name'], " ", $store['location'] . "</button><br>";
                 }
             }
             ?>
         </div>
+        <input type="submit" name="" value="Yikes">Yikes</button>
+
     </body>
 
 </html>

