@@ -109,7 +109,7 @@ $current_name = $store_info['store_name'];
     </div>
     <div class="column-style">
         <h1>Unassigned Managers:</h1>
-        <p> [Red buttons below to permanently remove manager]</p>
+        <p> [Red buttons below to permanently remove manager account]</p>
         <?php
         $freeManagers = "select * from manager_acc where shop_location = '$current_store' and dept_ID is NULL";
         $result = mysqli_query($con, $freeManagers);
