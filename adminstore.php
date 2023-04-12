@@ -138,7 +138,7 @@ $current_name = $store_info['store_name'];
                 }
                 echo "<br> Enter new " . $department['dept_name'] . " department manager ID below <br><form name='form' action='' method='post'>
                 <input type='text' name='new_m_ID'> <br>
-                <input type='submit' name='new_m_dept' value='" . $department['dept_name'] . "'><br></form>";
+                <input type='submit' name='new_m_dept' value='" . $department['dept_name'] . "'><br><br></form>";
             }
         }
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -157,6 +157,7 @@ $current_name = $store_info['store_name'];
                         $newquery = "update manager_acc set dept_ID = $cur_deptinfo[dept_ID] where adminm_account_ID = '$new_manager_ID'";
                         mysqli_query($con, $newquery);
                         echo "Manager successfully added!";
+                        header("refresh: 0");
                     } else {
                         echo "Manager is already apart of a department.";
                     }
