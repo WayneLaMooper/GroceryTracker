@@ -1,20 +1,33 @@
 
 h1{
-    white-space: nowrap;
+    white-space: normal;
 }
 
 body{
     background-color: black;
     color: whitesmoke;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
-.gallery {
-    display: grid;
-    grid-template-rows: repeat(4, 5vw);
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 200px;
+.column-style{
+    background-image: linear-gradient(dimgrey, silver);
+    color:whitesmoke;
+    text-align: center;
+    border-style: solid;
+    border-radius: 10%;
+    border-color: whitesmoke;
+    margin-top: 10%;
+    margin-right: 5%;
+    margin-left: 5%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.divider{
+    border-style: solid;
+    border-top-color: black;
+    border-bottom-color: black;
+    border-color: black;
 }
 
 img {

@@ -26,20 +26,21 @@ $current_name = $store_info['store_name'];
 </head>
 
 <body>
-    <div>
+    <div class="column-style">
         <button class="return-button" onclick="location.href='ownerindex.php';">
             Return to all Stores
         </button>
 
         <h1> Welcome back <?php echo $user_data['username']; ?> to <?php echo $current_name; ?>!</h1>
-
-        <form method="post">
+        <br>
+        <form method="post" class="divider">
+            <br>
             <div>Add New Department!</div>
             <br>
             <div>Department Name:</div>
             <input type="text" name="d_name"><br>
             <br>
-            <input type="submit" value="Add Department"><br>
+            <input type="submit" value="Add Department"><br><br><br>
         </form>
         <?php
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -75,7 +76,7 @@ $current_name = $store_info['store_name'];
             <input type="password" name="m_password"><br>
             <br>
             <input type="submit" value="Create Account"><br>
-        </form>
+        </form><br>
         <?php
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             if (isset($_POST['m_username'])) {
@@ -105,7 +106,7 @@ $current_name = $store_info['store_name'];
         }
         ?>
     </div>
-    <div>
+    <div class="column-style">
         <h1>Unassigned Managers:</h1>
         <?php
         $freeManagers = "select * from manager_acc where shop_location = '$current_store' and dept_ID is NULL";
@@ -120,14 +121,14 @@ $current_name = $store_info['store_name'];
         }
         ?>
     </div>
-    <div>
+    <div class="column-style">
         <h1>Departments:</h1>
         <?php
         $allDepartments = "select * from department";
         $result = mysqli_query($con, $allDepartments);
         if ($result && mysqli_num_rows($result) > 0) {
             while ($department = mysqli_fetch_assoc($result)) {
-                echo $department['dept_name'] . " department managers: <br>";
+                echo "<div class='divider'>" . $department['dept_name'] . " department managers: <br>";
                 $departQuery = "select * from manager_acc where dept_ID = $department[dept_ID]";
                 $deptmanager_result = mysqli_query($con, $departQuery);
                 while ($deptmanager_info = mysqli_fetch_assoc($deptmanager_result)) {
@@ -138,7 +139,7 @@ $current_name = $store_info['store_name'];
                 }
                 echo "<br> Enter new " . $department['dept_name'] . " department manager ID below <br><form name='form' action='' method='post'>
                 <input type='text' name='new_m_ID'> <br>
-                <input type='submit' name='new_m_dept' value='" . $department['dept_name'] . "'><br><br></form>";
+                <input type='submit' name='new_m_dept' value='" . $department['dept_name'] . "'><br><br></form></div>";
             }
         }
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
