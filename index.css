@@ -28,6 +28,7 @@ img {
     font-size: 13;
     border-color: rgb(165, 202, 78);
     border-width: 2px;
+    transition: background-color 0.5s;
   }
 
 .favourites-button:hover{
@@ -49,6 +50,7 @@ img {
     font-size: 13;
     border-color: rgb(214, 56, 56);
     border-width: 1px;
+    transition: background-color 0.5s;
   }
 
 .logout-button:hover{
@@ -70,6 +72,7 @@ img {
     font-size: 13;
     border-color: rgb(226, 162, 44);
     border-width: 1px;
+    transition: background-color 0.5s;
   }
 
 .return-button:hover{
