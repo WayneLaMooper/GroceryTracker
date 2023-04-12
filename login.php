@@ -23,7 +23,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     header("Location: index.php");
                     die;
                 } else {
-                    echo "Employee Account";
+                    $query = "select * from owner_acc where admino_account_ID = $user_data[account_ID] limit 1";
+                    $result = mysqli_query($con, $query);
+                    if ($result && mysqli_num_rows($result) > 0) {
+                        header("Location: ownerindex.php");
+                        die;
+                    }
                 }
             } else {
                 echo "Incorrect username or password";
