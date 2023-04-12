@@ -67,6 +67,7 @@ img {
     font-size: 13;
     border-color: rgb(165, 202, 78);
     border-width: 2px;
+    transition: background-color 0.5s;
   }
 
 .ownersignup-button {
@@ -80,6 +81,7 @@ img {
     font-size: 13;
     border-color: rgb(165, 202, 78);
     border-width: 2px;
+    transition: background-color 0.5s;
 }
 
 .signup-button:hover{
