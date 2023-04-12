@@ -79,6 +79,7 @@ $store_info = mysqli_fetch_assoc($result);
     </div>
     <div class="column-style">
         <h1>Unassigned Employees:</h1>
+        <p> [Red buttons below to permanently remove employee account]</p>
         <?php
         $freeEmps = "select * from employee_acc where shop_location = '$store_info[location]' and dept_ID is NULL";
         $result = mysqli_query($con, $freeEmps);
