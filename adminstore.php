@@ -33,40 +33,41 @@ $current_name = $store_info['store_name'];
 
         <h1> Welcome back <?php echo $user_data['username']; ?> to <?php echo $current_name; ?>!</h1>
         <br>
-        <form method="post" class="divider">
-            <br>
-            <div>Add New Department!</div>
-            <br>
-            <div>Department Name:</div>
-            <input type="text" name="d_name"><br>
-            <br>
-            <input type="submit" value="Add Department"><br><br><br>
-        </form>
-        <?php
-        if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            if (isset($_POST['d_name'])) {
-                $dept_name = $_POST['d_name'];
+        <div class="divider">
+            <form method="post">
+                <br>
+                <div>Add New Department!</div>
+                <br>
+                <div>Department Name:</div>
+                <input type="text" name="d_name"><br>
+                <br>
+                <input type="submit" value="Add Department"><br><br>
+            </form>
+            <?php
+            if ($_SERVER['REQUEST_METHOD'] == "POST") {
+                if (isset($_POST['d_name'])) {
+                    $dept_name = $_POST['d_name'];
 
-                if (!empty($dept_name)) {
-                    $queryName = "select * from department where shop_location = '$current_store' and dept_name = '$dept_name'";
-                    $result = mysqli_query($con, $queryName);
+                    if (!empty($dept_name)) {
+                        $queryName = "select * from department where shop_location = '$current_store' and dept_name = '$dept_name'";
+                        $result = mysqli_query($con, $queryName);
 
-                    if ($result && mysqli_num_rows($result) > 0) {
-                        echo "Department already exists.";
+                        if ($result && mysqli_num_rows($result) > 0) {
+                            echo "Department already exists.";
+                        } else {
+                            $query = "insert into department (dept_name, shop_location) values ('$dept_name', '$current_store')";
+                            mysqli_query($con, $query);
+                            echo "Department successfully added!";
+                        }
                     } else {
-                        $query = "insert into department (dept_name, shop_location) values ('$dept_name', '$current_store')";
-                        mysqli_query($con, $query);
-                        echo "Department successfully added!";
+                        echo "Empty entry, please try again.";
                     }
-                } else {
-                    echo "Empty entry, please try again.";
                 }
             }
-        }
-        ?>
-        <br>
-        <br>
+            ?>
+        </div>
         <form method="post">
+            <br>
             <div>Manager Account Creation!</div>
             <br>
             <div>Username:</div>
@@ -160,10 +161,14 @@ $current_name = $store_info['store_name'];
                         echo "Manager successfully added!";
                         header("refresh: 0");
                     } else {
-                        echo "Manager is already apart of a department.";
+                        echo '<script type="text/javascript">
+                        window.onload = function () { alert("Error: Manager is already apart of a department, or does not exist."); } 
+                        </script>';
                     }
                 } else {
-                    echo "Empty entry, please try again.";
+                    echo '<script type="text/javascript">
+                    window.onload = function () { alert("Error: Empty entry, please try again."); } 
+                    </script>';
                 }
             }
         }
