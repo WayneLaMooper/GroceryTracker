@@ -19,7 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $query = "insert into user_account (account_ID, username, password) values ('$user_id', '$user_name', '$password')";
 
             mysqli_query($con, $query);
-            $query = "insert into customer_acc (customer_ID) values ('$user_id')";
+            $query = "insert into admin_acc (admin_ID) values ('$user_id')";
+            mysqli_query($con, $query);
+            $query = "insert into owner_acc (admino_account_ID) values ('$user_id')";
             mysqli_query($con, $query);
             header("Location: login.php");
             die;
@@ -44,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <div id="box">
         <img src="images/loginPic.jpg" alt="Fruits and Vegetables">
         <form method="post">
-            <div>Welcome to Grocery Tracker Signup!</div>
+            <div>Welcome to Grocery Tracker Owner Signup!</div>
             <br>
             <div>Username:</div>
             <input type="text" name="username"><br>
@@ -56,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <br>
             <a href="login.php">Click to Login</a>
             <br>
-            <a href="ownersignup.php">Click to Signup as Owner</a>
+            <a href="signup.php">Click to Signup as Guest</a>
         </form>
     </div>
 
