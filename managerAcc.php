@@ -94,63 +94,58 @@ $store_info = mysqli_fetch_assoc($result);
         <div class="divider">
             <?php
             if (isset($manager_info['dept_ID'])) {
+                $query = "select * from department where dept_ID = '$manager_info[dept_ID]'";
+                $result = mysqli_query($con, $query);
+                $dept_info = mysqli_fetch_assoc($result);
+                echo "<h1>" . $dept_info['dept_name'] . " Employees: </h1>";
+                $query = "select * from employee_acc where dept_ID = $dept_info[dept_ID]";
+                $result = mysqli_query($con, $query);
+                while ($emp_info = mysqli_fetch_assoc($result)) {
+                    $query = "select * from user_account where account_ID = $emp_info[admine_account_ID]";
+                    $empResult = mysqli_query($con, $query);
+                    $emp_name = mysqli_fetch_assoc($empResult);
+                    echo $emp_name['username'] . " " . $emp_name['account_ID'] . "<br>";
+                }
+                echo "<br> Enter new " . $dept_info['dept_name'] . " department employee ID below <br><form name='form' action='' method='post'>
+                <input type='text' name='new_e_ID'> <br>
+                <input type='submit' name='new_e_dept' value='" . $dept_info['dept_name'] . "'><br><br></form></div>";
             } else {
                 echo "Currently not assigned a department. Restricted permissions, please ask your superior if permissions are required.";
+            }
+            if ($_SERVER['REQUEST_METHOD'] == "POST") {
+                if (isset($_POST['new_e_ID'])) {
+                    $new_emp_ID = $_POST['new_e_ID'];
+                    $new_emp_dept = $_POST['new_e_dept'];
+
+                    if (!empty($new_emp_ID) && !empty($new_emp_dept)) {
+                        $queryName = "select * from employee_acc where admine_account_ID = '$new_emp_ID' and dept_ID is NULL";
+                        $result = mysqli_query($con, $queryName);
+
+                        if ($result && mysqli_num_rows($result) > 0) {
+                            $departmentQ = "select * from department where dept_name = '$new_emp_dept' and shop_location = '$store_info[location]'";
+                            $curdept = mysqli_query($con, $departmentQ);
+                            $cur_deptinfo = mysqli_fetch_assoc($curdept);
+                            $newquery = "update employee_acc set dept_ID = $cur_deptinfo[dept_ID] where admine_account_ID = '$new_emp_ID'";
+                            mysqli_query($con, $newquery);
+                            echo "Employee successfully added!";
+                            header("refresh: 0");
+                        } else {
+                            echo '<script type="text/javascript">
+                            window.onload = function () { alert("Error: Employee is already apart of a department, or does not exist."); } 
+                            </script>';
+                        }
+                    } else {
+                        echo '<script type="text/javascript">
+                        window.onload = function () { alert("Error: Empty entry, please try again."); } 
+                        </script>';
+                    }
+                }
             }
             ?>
         </div>
     </div>
     <div class="column-style">
-        <h1>Departments:</h1>
-        <?php
-        $allDepartments = "select * from department";
-        $result = mysqli_query($con, $allDepartments);
-        if ($result && mysqli_num_rows($result) > 0) {
-            while ($department = mysqli_fetch_assoc($result)) {
-                echo "<div class='divider'>" . $department['dept_name'] . " department managers: <br>";
-                $departQuery = "select * from manager_acc where dept_ID = $department[dept_ID]";
-                $deptmanager_result = mysqli_query($con, $departQuery);
-                while ($deptmanager_info = mysqli_fetch_assoc($deptmanager_result)) {
-                    $manQuery = "select username from user_account where account_ID = $deptmanager_info[adminm_account_ID]";
-                    $manager_result = mysqli_query($con, $manQuery);
-                    $manager_info = mysqli_fetch_assoc($manager_result);
-                    echo $manager_info['username'] . " " . $deptmanager_info['adminm_account_ID'] . "<br>";
-                }
-                echo "<br> Enter new " . $department['dept_name'] . " department manager ID below <br><form name='form' action='' method='post'>
-                <input type='text' name='new_m_ID'> <br>
-                <input type='submit' name='new_m_dept' value='" . $department['dept_name'] . "'><br><br></form></div>";
-            }
-        }
-        if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            if (isset($_POST['new_m_ID'])) {
-                $new_manager_ID = $_POST['new_m_ID'];
-                $new_manager_dept = $_POST['new_m_dept'];
-
-                if (!empty($new_manager_ID) && !empty($new_manager_dept)) {
-                    $queryName = "select * from manager_acc where adminm_account_ID = '$new_manager_ID' and dept_ID is NULL";
-                    $result = mysqli_query($con, $queryName);
-
-                    if ($result && mysqli_num_rows($result) > 0) {
-                        $departmentQ = "select * from department where dept_name = '$new_manager_dept' and shop_location = '$current_store'";
-                        $curdept = mysqli_query($con, $departmentQ);
-                        $cur_deptinfo = mysqli_fetch_assoc($curdept);
-                        $newquery = "update manager_acc set dept_ID = $cur_deptinfo[dept_ID] where adminm_account_ID = '$new_manager_ID'";
-                        mysqli_query($con, $newquery);
-                        echo "Manager successfully added!";
-                        header("refresh: 0");
-                    } else {
-                        echo '<script type="text/javascript">
-                        window.onload = function () { alert("Error: Manager is already apart of a department, or does not exist."); } 
-                        </script>';
-                    }
-                } else {
-                    echo '<script type="text/javascript">
-                    window.onload = function () { alert("Error: Empty entry, please try again."); } 
-                    </script>';
-                }
-            }
-        }
-        ?>
+        <h1>Products:</h1>
     </div>
 </body>
 
