@@ -36,7 +36,9 @@ $user_data = check_login($con);
   </div>
   <br>
 
-  <button class="favourites-button">Favourites</button>
+  <button class="favourites-button" onclick="location.href='favourites.php';">
+    Favourites
+  </button>
 
   <a href="favourites.php">Favourites</a>
   <br>
