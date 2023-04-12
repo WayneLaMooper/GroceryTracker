@@ -8,6 +8,10 @@ include("functions.php");
 $user_data = check_login($con);
 $current_store = $_SESSION['current_store'];
 
+$query = "select * from shop where location = '$current_store'";
+$result = mysqli_query($con, $query);
+$store_info = mysqli_fetch_assoc($result);
+$current_name = $store_info['store_name'];
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +30,7 @@ $current_store = $_SESSION['current_store'];
         Return to all Stores
     </button>
 
-    <h1> <?php echo $current_store; ?>
+    <h1> Welcome back <?php echo $user_data['username']; ?> to <?php echo $current_name; ?>!
     </h1>
 
     <br>
