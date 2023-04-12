@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <br>
             <input type="submit" value="Signup"><br>
             <br>
-            <a href="login.php">Click to Login</a>
+            <a href="login.php">Click to Login</a><br>
             <br>
             <a href="ownersignup.php">Click to Signup as Owner</a>
         </form>
