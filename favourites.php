@@ -20,7 +20,9 @@ $user_data = check_login($con);
 
 <body>
 
-    <a href="index.php">back to main page</a>
+    <button class="logout-button" onclick="location.href='index.php';">
+        Main Page
+    </button>
     <h1>This is the favourites page </h1>
 
     <br>
