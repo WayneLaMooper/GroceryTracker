@@ -31,7 +31,7 @@ $current_name = $store_info['store_name'];
             Return to all Stores
         </button>
 
-        <h1> Welcome back <?php echo $user_data['username']; ?> to <?php echo $current_name; ?>!</h1>
+        <h1> Welcome back <?php echo $user_data['username']; ?> to <?php echo $current_name . " " . $current_store; ?>!</h1>
         <br>
         <div class="divider">
             <form method="post">
