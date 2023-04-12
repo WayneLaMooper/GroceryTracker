@@ -79,6 +79,7 @@ $store_info = mysqli_fetch_assoc($result);
     </div>
     <div class="column-style">
         <h1>Unassigned Employees:</h1>
+        <p> [Red buttons below to permanently remove employee account]</p>
         <?php
         $freeEmps = "select * from employee_acc where shop_location = '$store_info[location]' and dept_ID is NULL";
         $result = mysqli_query($con, $freeEmps);
@@ -87,7 +88,25 @@ $store_info = mysqli_fetch_assoc($result);
                 $empQuery = "select username from user_account where account_ID = $employee[admine_account_ID]";
                 $employee_result = mysqli_query($con, $empQuery);
                 $employee_info = mysqli_fetch_assoc($employee_result);
-                echo $employee_info['username'] . " " . $employee['admine_account_ID'] . "<br>";
+                echo $employee_info['username'] . " " . $employee['admine_account_ID'] . "
+                <form name='form' action='' method='post'>
+                <input type='submit' name='delete_emp' value='" . $employee['admine_account_ID'] . "' class='remove-dept-button'></form>";
+            }
+        }
+        echo "<br> Enter employee ID of assigned employee to unassign below <br><form name='form' action='' method='post'>
+        <input type='text' name='unassign_ID'> <br>
+        <input type='submit' name='unassign_submit' value='Unassign'><br><br></form>";
+
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            if (isset($_POST['unassign_ID'])) {
+                $query = "update employee_acc set dept_ID = NULL where admine_account_ID = '$_POST[unassign_ID]'";
+                mysqli_query($con, $query);
+                header("refresh:0");
+            }
+            if (isset($_POST['delete_emp'])) {
+                $query = "delete from user_account where account_ID = '$_POST[delete_emp]'";
+                mysqli_query($con, $query);
+                header("refresh: 0");
             }
         }
         ?>
