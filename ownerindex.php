@@ -9,8 +9,8 @@ $user_data = check_login($con);
 $current_store = '';
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    if (isset($_POST['store_butt'])) {
-        echo $_POST['store_butt'];
+    if (isset($_POST['store_button'])) {
+        echo $_POST['store_button'];
         header("Location= adminstore.php");
         die;
     } else {
@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             if ($result && mysqli_num_rows($result) > 0) {
                 while ($store = mysqli_fetch_assoc($result)) {
                     echo "<form name='form' action='' method='post'>
-                    <input type='submit' name='store_butt' id='store_butt' value='" . $store['store_name'] . " " . $store['location'] . "'></form>";
+                    <input type='submit' name='store_butt' id='store_button' value='" . $store['store_name'] . " " . $store['location'] . "'></form>";
                 }
             }
             ?>
