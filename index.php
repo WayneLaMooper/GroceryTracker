@@ -7,28 +7,28 @@ include("functions.php");
 
 $user_data = check_login($con);
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   if(isset($_GET['imgSrc']) && isset($_GET['imgCode'])) {
     $img_src = $_GET['imgSrc'];
     $img_srl = $_GET['imgCode'];
+
     $query = "select * from product where serial_code = '$img_srl'";
     $result = mysqli_query($con, $query);
     $user_data = mysqli_fetch_assoc($result);
 
-    if (isset($img_srl)) {
-      if ($result && mysqli_num_rows($result) > 0) {
-        $user_data = mysqli_fetch_assoc($result);
+    if ($result && mysqli_num_rows($result) > 0) {
+      $user_data = mysqli_fetch_assoc($result);
 
-        if($img_srl === $user_data['serial_code']) {
-          $_SESSION['i_src'] = $img_src;
-          $_SESSION['i_code'] = $user_data['serial_code'];
-          $_SESSION['i_stock'] = $user_data['stock'];
-          $_SESSION['i_price'] = $user_data['price'];
-          header("Location: product.php");
-          die;
-        }
+      if($img_srl === $user_data['serial_code']) {
+        $_SESSION['i_src'] = $img_src;
+        $_SESSION['i_code'] = $img_code;
+        $_SESSION['i_stock'] = $user_data['stock'];
+        $_SESSION['i_price'] = $user_data['price'];
+        header("Location: product.php");
+        die;
       }
     }
+    
   }
 }
 
@@ -106,14 +106,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       var images = document.querySelectorAll('.image');
 
       for (var i = 0; i < images.length; i++) {
-        images[i].addEventListener('click', check)
+        images[i].addEventListener('click', function() {
+          check(images[i]);
+        });
       }
 
       function check(img) {
-        var imgName = event.target.src;
-        var imgCode = event.target.alt;
+        console.log("Image clicked!");
+        var imgName = img.src;
+        var imgCode = img.alt;
         var xhttp = new XMLHttpRequest();
-        xhttp.open("GET", "<?php echo $_SERVER['PHP_SELF']; ?>?imgSrc=" + imgName + "&imgCode=" + imgCode, true);
+        xhttp.open("GET", "index.php?imgSrc=" + imgName + "&imgCode=" + imgCode, true);
         xhttp.send();
         
       }
