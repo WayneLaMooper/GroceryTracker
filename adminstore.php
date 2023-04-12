@@ -125,7 +125,7 @@ $current_name = $store_info['store_name'];
     <div class="column-style">
         <h1>Departments:</h1>
         <?php
-        $allDepartments = "select * from department";
+        $allDepartments = "select * from department where shop_location = '$current_store'";
         $result = mysqli_query($con, $allDepartments);
         if ($result && mysqli_num_rows($result) > 0) {
             while ($department = mysqli_fetch_assoc($result)) {
