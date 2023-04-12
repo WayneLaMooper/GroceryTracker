@@ -17,6 +17,15 @@ img {
     object-fit: cover;
 }
 
+.favourites-button {
+    background-color: grey;
+    color: white;
+    height: 25px;
+    width: 100px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
 button {
     background-color: grey;
     color: white;

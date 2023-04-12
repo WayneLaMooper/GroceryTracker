@@ -36,10 +36,7 @@ $user_data = check_login($con);
   </div>
   <br>
 
-  <style>
-
-  </style>
-  <button>Favourites</button>
+  <button class="favourites-button">Favourites</button>
 
   <a href="favourites.php">Favourites</a>
   <br>
