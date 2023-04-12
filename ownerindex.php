@@ -9,22 +9,28 @@ $user_data = check_login($con);
 $current_store = '';
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $store_location = $_POST['Location'];
-    $store_name = $_POST['Store_name'];
-
-    if (!empty($store_location) && !empty($store_name)) {
-        $queryName = "select * from shop where location = '$store_location'";
-        $result = mysqli_query($con, $queryName);
-
-        if ($result && mysqli_num_rows($result) > 0) {
-            echo "Store already exists at this location, please try again.";
-        } else {
-            $query = "insert into shop (location, store_name, owner_ID) values ('$store_location', '$store_name', $user_data[account_ID])";
-            mysqli_query($con, $query);
-            echo "Store successfully added!";
-        }
+    if (isset($_POST['store_butt'])) {
+        echo $_POST['store_butt'];
+        header("Location= adminstore.php");
+        die;
     } else {
-        echo "Empty entry, please try again.";
+        $store_location = $_POST['Location'];
+        $store_name = $_POST['Store_name'];
+
+        if (!empty($store_location) && !empty($store_name)) {
+            $queryName = "select * from shop where location = '$store_location'";
+            $result = mysqli_query($con, $queryName);
+
+            if ($result && mysqli_num_rows($result) > 0) {
+                echo "Store already exists at this location, please try again.";
+            } else {
+                $query = "insert into shop (location, store_name, owner_ID) values ('$store_location', '$store_name', $user_data[account_ID])";
+                mysqli_query($con, $query);
+                echo "Store successfully added!";
+            }
+        } else {
+            echo "Empty entry, please try again.";
+        }
     }
 }
 ?>
@@ -70,12 +76,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $result = mysqli_query($con, $allStores);
             if ($result && mysqli_num_rows($result) > 0) {
                 while ($store = mysqli_fetch_assoc($result)) {
-                    echo "<button onclick='set_store()'>" . $store['store_name'], " ", $store['location'] . "</button><br>";
+                    echo "<form name='form' action='' method='post'>
+                    <input type='submit' name='store_butt' id='store_butt' value='" . $store['store_name'] . " " . $store['location'] . "'></form>";
                 }
             }
             ?>
         </div>
-        <input type="submit" name="" value="Yikes">Yikes</button>
 
     </body>
 
