@@ -41,7 +41,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 <body>
 
-    <a href="logout.php">Logout</a>
+    <button class="logout-button" onclick="location.href='logout.php';">
+        Logout
+    </button>
     <h1>Welcome <?php echo $user_data['username']; ?>
     </h1>
 

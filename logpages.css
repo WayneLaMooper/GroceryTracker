@@ -89,3 +89,11 @@ img {
 .ownersignup-button:hover{
     background-color: rgb(165, 202, 78);
 }
+
+.signup-button:active{
+    background-color: rgb(128, 158, 57);
+}
+
+.ownersignup-button:active{
+    background-color: rgb(128, 158, 57);
+}
