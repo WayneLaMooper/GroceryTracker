@@ -6,12 +6,11 @@ include("connection.php");
 include("functions.php");
 
 $user_data = check_login($con);
-$current_store = '';
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (isset($_POST['store_button'])) {
-        echo $_POST['store_button'];
-        header("Location= adminstore.php");
+        $_SESSION['current_store'] = $_POST['store_button'];
+        header("Location: adminstore.php");
         die;
     } else {
         $store_location = $_POST['Location'];
