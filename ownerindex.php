@@ -6,6 +6,26 @@ include("connection.php");
 include("functions.php");
 
 $user_data = check_login($con);
+
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $store_location = $_POST['Location'];
+    $store_name = $_POST['Store_name'];
+
+    if (!empty($store_location) && !empty($store_name)) {
+        $queryName = "select * from shop where location = '$store_location'";
+        $result = mysqli_query($con, $queryName);
+
+        if ($result && mysqli_num_rows($result) > 0) {
+            echo "Store already exists at this location, please try again.";
+        } else {
+            $query = "insert into shop (location, store_name, owner_ID) values ('$store_location', '$store_name', $user_data[account_ID])";
+            mysqli_query($con, $query);
+            echo "Store successfully added!";
+        }
+    } else {
+        echo "Empty entry, please try again.";
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -39,6 +59,18 @@ $user_data = check_login($con);
                 <br>
                 <input type="submit" value="Add"><br>
             </form>
+        </div>
+        <div>
+            <h1> Stores:</h1>
+            <?php
+            $allStores = "select * from shop where owner_ID = $user_data[account_ID]";
+            $result = mysqli_query($con, $allStores);
+            if ($result && mysqli_num_rows($result) > 0) {
+                while ($store = mysqli_fetch_assoc($result)) {
+                    echo $store['store_name'] . "<br>";
+                }
+            }
+            ?>
         </div>
     </body>
 

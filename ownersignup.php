@@ -17,7 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             echo "Username taken, please try again.";
         } else {
             $query = "insert into user_account (account_ID, username, password) values ('$user_id', '$user_name', '$password')";
-
             mysqli_query($con, $query);
             $query = "insert into admin_acc (admin_ID) values ('$user_id')";
             mysqli_query($con, $query);
