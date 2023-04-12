@@ -37,6 +37,38 @@ $current_name = $store_info['store_name'];
     <body>
         <div id="box">
             <form method="post">
+                <div>Add New Department!</div>
+                <br>
+                <div>Department Name:</div>
+                <input type="text" name="d_name"><br>
+                <br>
+                <input type="submit" value="Add Department"><br>
+            </form>
+            <?php
+            if ($_SERVER['REQUEST_METHOD'] == "POST") {
+                if (isset($_POST['d_name'])) {
+                    $dept_name = $_POST['d_name'];
+
+                    if (!empty($dept_name)) {
+                        $queryName = "select * from department where shop_location = '$current_store' and dept_name = '$dept_name'";
+                        $result = mysqli_query($con, $queryName);
+
+                        if ($result && mysqli_num_rows($result) > 0) {
+                            echo "Department already exists.";
+                        } else {
+                            $query = "insert into department (dept_name, shop_location) values ('$dept_name', '$current_store')";
+                            mysqli_query($con, $query);
+                            echo "Department successfully added!";
+                        }
+                    } else {
+                        echo "Empty entry, please try again.";
+                    }
+                }
+            }
+            ?>
+            <br>
+            <br>
+            <form method="post">
                 <div>Manager Account Creation!</div>
                 <br>
                 <div>Username:</div>
@@ -49,27 +81,29 @@ $current_name = $store_info['store_name'];
             </form>
             <?php
             if ($_SERVER['REQUEST_METHOD'] == "POST") {
-                $user_name = $_POST['m_username'];
-                $password = $_POST['m_password'];
+                if (isset($_POST['m_username'])) {
+                    $user_name = $_POST['m_username'];
+                    $password = $_POST['m_password'];
 
-                if (!empty($user_name) && !empty($password)) {
-                    $user_id = random_num(20);
-                    $queryName = "select * from user_account where username = '$user_name'";
-                    $result = mysqli_query($con, $queryName);
+                    if (!empty($user_name) && !empty($password)) {
+                        $user_id = random_num(20);
+                        $queryName = "select * from user_account where username = '$user_name'";
+                        $result = mysqli_query($con, $queryName);
 
-                    if ($result && mysqli_num_rows($result) > 0) {
-                        echo "Username taken, please try again.";
+                        if ($result && mysqli_num_rows($result) > 0) {
+                            echo "Username taken, please try again.";
+                        } else {
+                            $query = "insert into user_account (account_ID, username, password) values ('$user_id', '$user_name', '$password')";
+                            mysqli_query($con, $query);
+                            $query = "insert into admin_acc (admin_ID) values ('$user_id')";
+                            mysqli_query($con, $query);
+                            $query = "insert into manager_acc (adminm_account_ID, shop_location) values ('$user_id', '$current_store')";
+                            mysqli_query($con, $query);
+                            echo "Account successfully created!";
+                        }
                     } else {
-                        $query = "insert into user_account (account_ID, username, password) values ('$user_id', '$user_name', '$password')";
-                        mysqli_query($con, $query);
-                        $query = "insert into admin_acc (admin_ID) values ('$user_id')";
-                        mysqli_query($con, $query);
-                        $query = "insert into manager_acc (adminm_account_ID) values ('$user_id')";
-                        mysqli_query($con, $query);
-                        echo "Account successfully created!";
+                        echo "Empty entry, please try again.";
                     }
-                } else {
-                    echo "Empty entry, please try again.";
                 }
             }
             ?>

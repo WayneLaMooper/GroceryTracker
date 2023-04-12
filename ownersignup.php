@@ -43,7 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 <body>
     <div id="box">
-        <img src="images/loginPic.jpg" alt="Fruits and Vegetables">
         <form method="post">
             <div>Welcome to Grocery Tracker Owner Signup!</div>
             <br>
@@ -56,9 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <br>
             <input type="submit" value="Signup"><br>
             <br>
-            <!-- <a href="login.php">Click to Login</a><br>
-            <br>
-            <a href="signup.php">Click to Signup as Guest</a> -->
         </form>
     </div>
 
