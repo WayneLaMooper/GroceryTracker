@@ -40,7 +40,6 @@ $user_data = check_login($con);
     Favourites
   </button>
 
-  <a href="favourites.php">Favourites</a>
   <br>
   <!-- pictures on a gridlike fashion. click on image for a popup -->
   <hr>
