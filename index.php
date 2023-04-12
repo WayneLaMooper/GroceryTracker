@@ -35,6 +35,12 @@ $user_data = check_login($con);
     </form>
   </div>
   <br>
+
+  <style>
+
+  </style>
+  <button>Favourites</button>
+
   <a href="favourites.php">Favourites</a>
   <br>
   <!-- pictures on a gridlike fashion. click on image for a popup -->
