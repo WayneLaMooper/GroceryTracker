@@ -21,7 +21,8 @@ $user_data = check_login($con);
 <body>
 
   <a href="logout.php">Logout</a>
-  <h1>This is the index page </h1>
+  <h1>Welcome <?php echo $user_data['username']; ?>
+  </h1>
 
   <br>
 
