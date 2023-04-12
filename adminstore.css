@@ -23,6 +23,11 @@ body{
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.remove-dept-button{
+    background-color: red;
+    color: whitesmoke;
+}
+
 .divider{
     border-style: solid;
     border-top-color: black;

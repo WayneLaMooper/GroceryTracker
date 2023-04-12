@@ -120,6 +120,17 @@ $current_name = $store_info['store_name'];
                 echo $manager_info['username'] . " " . $manager['adminm_account_ID'] . "<br>";
             }
         }
+        echo "<br> Enter manager ID of assigned manager to unassign below <br><form name='form' action='' method='post'>
+        <input type='text' name='unassign_ID'> <br>
+        <input type='submit' name='unassign_submit' value='Unassign'><br><br></form></div>";
+
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            if (isset($_POST['unassign_ID'])) {
+                $query = "update manager_acc set dept_ID = NULL where adminm_account_ID = '$_POST[unassign_ID]'";
+                mysqli_query($con, $query);
+                header("refresh:0");
+            }
+        }
         ?>
     </div>
     <div class="column-style">
@@ -138,7 +149,9 @@ $current_name = $store_info['store_name'];
                     $manager_info = mysqli_fetch_assoc($manager_result);
                     echo $manager_info['username'] . " " . $deptmanager_info['adminm_account_ID'] . "<br>";
                 }
-                echo "<br> Enter new " . $department['dept_name'] . " department manager ID below <br><form name='form' action='' method='post'>
+                echo "<br>Remove " . $department['dept_name'] . " department: <form name='form' action='' method='post'>
+                <input type='submit' name='remove_dept' class='remove-dept-button' value='" . $department['dept_name'] . "'></form>
+                Enter new " . $department['dept_name'] . " department manager ID below <br><form name='form' action='' method='post'>
                 <input type='text' name='new_m_ID'> <br>
                 <input type='submit' name='new_m_dept' value='" . $department['dept_name'] . "'><br><br></form></div>";
             }
@@ -170,6 +183,13 @@ $current_name = $store_info['store_name'];
                     window.onload = function () { alert("Error: Empty entry, please try again."); } 
                     </script>';
                 }
+            } else if (isset($_POST['remove_dept'])) {
+                $query = "delete from department where dept_name = '$_POST[remove_dept]'";
+                mysqli_query($con, $query);
+                header("refresh: 0");
+                echo '<script type="text/javascript">
+                window.onload = function () { alert("Department ' . $_POST['remove_dept'] . ' has been removed."); } 
+                </script>';
             }
         }
         ?>
