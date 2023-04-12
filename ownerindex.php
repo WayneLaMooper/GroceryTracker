@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             if ($result && mysqli_num_rows($result) > 0) {
                 while ($store = mysqli_fetch_assoc($result)) {
                     echo "<form name='form' action='' method='post'>
-                    <input type='submit' name='store_butt' id='store_button' value='" . $store['store_name'] . " " . $store['location'] . "'></form>";
+                    <input type='submit' name='store_button' value='" . $store['store_name'] . " " . $store['location'] . "'></form>";
                 }
             }
             ?>
