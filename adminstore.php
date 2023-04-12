@@ -22,9 +22,10 @@ $current_store = $_SESSION['current_store'];
 
 <body>
 
-    <button class="logout-button" onclick="location.href='logout.php';">
-        Logout
+    <button class="return-button" onclick="location.href='ownerindex.php';">
+        Return to all Stores
     </button>
+
     <h1> <?php echo $current_store; ?>
     </h1>
 
