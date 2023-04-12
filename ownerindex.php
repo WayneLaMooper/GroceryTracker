@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $result = mysqli_query($con, $allStores);
             if ($result && mysqli_num_rows($result) > 0) {
                 while ($store = mysqli_fetch_assoc($result)) {
-                    echo $store['store_name'] . "<br>";
+                    echo "<a href='ownerindex.php'>" . $store['store_name'], " ", $store['location'] . "</a><br>";
                 }
             }
             ?>
