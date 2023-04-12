@@ -34,6 +34,10 @@ img {
     background-color: rgb(165, 202, 78);
 }
 
+.favourites-button:active{
+    background-color: rgb(128, 158, 57);
+}
+
 .logout-button {
     background-color: grey;
     color: white;
@@ -49,4 +53,8 @@ img {
 
 .logout-button:hover{
     background-color: rgb(214, 56, 56);
+}
+
+.logout-button:active{
+    background-color: rgb(192, 51, 51);
 }
