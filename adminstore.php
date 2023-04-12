@@ -109,6 +109,7 @@ $current_name = $store_info['store_name'];
     </div>
     <div class="column-style">
         <h1>Unassigned Managers:</h1>
+        <p> [Red buttons below to permanently remove manager]</p>
         <?php
         $freeManagers = "select * from manager_acc where shop_location = '$current_store' and dept_ID is NULL";
         $result = mysqli_query($con, $freeManagers);
@@ -117,7 +118,9 @@ $current_name = $store_info['store_name'];
                 $manQuery = "select username from user_account where account_ID = $manager[adminm_account_ID]";
                 $manager_result = mysqli_query($con, $manQuery);
                 $manager_info = mysqli_fetch_assoc($manager_result);
-                echo $manager_info['username'] . " " . $manager['adminm_account_ID'] . "<br>";
+                echo $manager_info['username'] . " " . $manager['adminm_account_ID'] . "
+                <form name='form' action='' method='post'>
+                <input type='submit' name='delete_manager' value='" . $manager['adminm_account_ID'] . "' class='remove-dept-button'></form>";
             }
         }
         echo "<br> Enter manager ID of assigned manager to unassign below <br><form name='form' action='' method='post'>
@@ -129,6 +132,11 @@ $current_name = $store_info['store_name'];
                 $query = "update manager_acc set dept_ID = NULL where adminm_account_ID = '$_POST[unassign_ID]'";
                 mysqli_query($con, $query);
                 header("refresh:0");
+            }
+            if (isset($_POST['delete_manager'])) {
+                $query = "delete from user_account where account_ID = '$_POST[delete_manager]'";
+                mysqli_query($con, $query);
+                header("refresh: 0");
             }
         }
         ?>
