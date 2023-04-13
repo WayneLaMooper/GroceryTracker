@@ -28,7 +28,7 @@ $user_data = check_login($con);
 //         die;
 //       }
 //     }
-    
+
 //   }
 // }
 
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   $product_name = $_POST['item'];
   $_SESSION['item_name'] = $product_name;
 
-  if(isset($product_name)) {
+  if (isset($product_name)) {
     $query = "select * from product where name = '$product_name'";
     $result = mysqli_query($con, $query);
 
@@ -47,19 +47,19 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $serial = $item_row_data['serial_code'];
         $_SESSION['ser_code'][$i] = $serial;
 
-        $query = "select * from provides where serial_code = '$serial'";
+        $query = "select * from provides where ser_code = '$serial'";
         $result = mysqli_query($con, $query);
 
         if ($result && mysqli_num_rows($result) > 0) {
           $j = 0;
 
-          while($provides_row = mysqli_fetch_assoc($result)) {
+          while ($provides_row = mysqli_fetch_assoc($result)) {
             $_SESSION['price'][$j] = $provides_row['price'];
             $_SESSION['stock'][$j] = $provides_row['stock'];
             $dept_id = $provides_row['dept_id'];
             $query = "select * from department where dept_ID = '$dept_id'";
             $result = mysqli_query($con, $query);
-            
+
             if ($result && mysqli_num_rows($result) > 0) {
               $_SESSION['location'][$j] = $provides_row['shop_location'];
             }
@@ -75,7 +75,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
   header("Location: product.php");
   die;
-
 }
 ?>
 
@@ -107,10 +106,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   <div id="search">
     <form method="post">
       <div>Search:</div>
-      <input type="text" name="item"><
-      <br>
-      <input type="submit" value= "Enter">
-      <br>
+      <input type="text" name="item">
+      < <br>
+        <input type="submit" value="Enter">
+        <br>
     </form>
   </div>
   <br>
@@ -122,32 +121,32 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   <br>
   <!-- pictures on a gridlike fashion. click on image for a popup -->
   <?php
-  
+
   ?>
   <hr>
   <div class="gallery">
     <figure>
-      <img src="images/apple.jpg" alt = "apple" class ="image">
+      <img src="images/apple.jpg" alt="apple" class="image">
     </figure>
 
     <figure>
-      <img src="images/orange.jpg" alt = "orange" class ="image">
+      <img src="images/orange.jpg" alt="orange" class="image">
     </figure>
 
     <figure>
-      <img src="images/banana.jpg" alt = "banana" class ="image">
+      <img src="images/banana.jpg" alt="banana" class="image">
     </figure>
 
     <figure>
-      <img src="images/flour.jpg" alt = "flour" class ="image">
+      <img src="images/flour.jpg" alt="flour" class="image">
     </figure>
 
     <figure>
-      <img src="images/eggs.jpg" alt = "eggs" class ="image">
+      <img src="images/eggs.jpg" alt="eggs" class="image">
     </figure>
 
     <figure>
-      <img src="images/butter.jpg" alt = "butter" class ="image">
+      <img src="images/butter.jpg" alt="butter" class="image">
     </figure>
 
     <!-- <script>
