@@ -64,7 +64,7 @@ $current_item = $_SESSION['item_name'];
 
     <!-- pictures on a gridlike fashion. click on image for a popup -->
     <hr>
-    <div class="gallery">
+    <div class="round-image">
         <figure>
             <img src="images/shopping cart.jpg">
         </figure>
