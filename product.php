@@ -23,7 +23,10 @@ $current_item = $_SESSION['item_name'];
 
 <body>
 
-    <a href="index.php">back to main page</a>
+    <button class="logout-button" onclick="location.href='index.php';">
+        Main Page
+    </button>
+
     <h1>This is the <?php echo $current_item ?> product page </h1>
     <?php
     for ($i = 0; $i < count($_SESSION['ser_code']); $i++) {
