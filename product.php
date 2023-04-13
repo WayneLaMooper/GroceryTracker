@@ -24,10 +24,10 @@ $current_item = $_SESSION['item_name'];
 <body>
 
     <a href="index.php">back to main page</a>
-    <h1>This is the <?php echo $current_item?> product page </h1>
-    <?php 
-    for ($i = 0; i < count($_SESSION['ser_code']); $i++) {
-        echo "<p> In the location".$_SESSION['location'][$i]. "<br>&nbsp;&nbsp;The price is:" . $_SESSION['price'][$i] . "<br>&nbsp;&nbsp;quantity:".$_SESSION['stock'][$i]. "<br> </p>"; 
+    <h1>This is the <?php echo $current_item ?> product page </h1>
+    <?php
+    for ($i = 0; $i < count($_SESSION['ser_code']); $i++) {
+        echo "<p> In the location" . $_SESSION['location'][$i] . "<br>&nbsp;&nbsp;The price is:" . $_SESSION['price'][$i] . "<br>&nbsp;&nbsp;quantity:" . $_SESSION['stock'][$i] . "<br> </p>";
     }
     ?>
     <br>
