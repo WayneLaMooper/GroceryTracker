@@ -1,5 +1,5 @@
 <?php
-
+ob_start();
 session_start();
 
 include("connection.php");
@@ -197,15 +197,15 @@ $store_info = mysqli_fetch_assoc($result);
             $query = "select * from provides where dept_id = $manager_info[dept_ID] and ser_code = $product_info[serial_code]";
             $productResults = mysqli_query($con, $query);
             if ($productResults && mysqli_num_rows($productResults) > 0) {
+                $provides_info = mysqli_fetch_assoc($productResults);
                 echo "<div class='prod-divider'>" . $product_info['name'] . "<br>" . $product_info['serial_code'] .
                     "<br> This product is in your department now. 
                     <form name='form' action='' method='post'>
-                    Stock:    <input type='text' name='update_prod_stock' value='0'><br>
-                    Price:    <input type='text' name='update_prod_price' value='0'><br>
-                    Discount: <input type='text' name='update_prod_discount' value='0'><br>
+                    Stock:    <input type='text' name='update_prod_stock' value='$provides_info[stock]'><br>
+                    Price:    <input type='text' name='update_prod_price' value='$provides_info[price]'><br>
+                    Discount: <input type='text' name='update_prod_discount' value='$provides_info[discount]'><br>
                     Update product info: 
-                    <input type='submit' name='update_prod_info' value='" . $product_info['serial_code'] . "'><br><br></form>
-                    </div>";
+                    <input type='submit' name='update_prod_info' value='" . $product_info['serial_code'] . "'><br><br></form></div>";
             } else {
                 $query = "select * from provides as p natural join department as d where d.shop_location = '$manager_info[shop_location]' and p.ser_code = '$product_info[serial_code]'";
                 $sameloc_Result = mysqli_query($con, $query);
@@ -225,7 +225,20 @@ $store_info = mysqli_fetch_assoc($result);
                 $prod_code = $_POST['new_dept_prod'];
                 $query = "insert into provides (ser_code, dept_id) values ('$prod_code', '$manager_info[dept_ID]')";
                 mysqli_query($con, $query);
-                header("refresh: 0");
+                header("refresh:0");
+            } else if (isset($_POST['update_prod_info'])) {
+                $prod_code = $_POST['update_prod_info'];
+                $prod_stock = $_POST['update_prod_stock'];
+                $prod_price = $_POST['update_prod_price'];
+                $prod_discount = $_POST['update_prod_discount'];
+                $query = "update provides set stock = $prod_stock, price = $prod_price, discount = $prod_discount
+                where dept_id = $manager_info[dept_ID] and ser_code = $prod_code";
+                if (!empty($prod_stock) || !empty($prod_price) || !empty($prod_discount)) {
+                    mysqli_query($con, $query);
+                    header("refresh:0");
+                } else {
+                    echo "One of the entries is empty, cannot update.";
+                }
             }
         }
         ?>
