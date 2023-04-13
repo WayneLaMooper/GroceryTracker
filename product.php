@@ -50,7 +50,8 @@ $current_item = $_SESSION['item_name'];
                 } else {
                     echo "<p> Location: " . $shop_info['store_name'] . " at " . $loc_info['shop_location'] .
                         "<br> Department: " . $loc_info['dept_name'] .
-                        "<br>&nbsp;&nbsp;The price is: $" . $provide_info['price'] . "<br></p>";
+                        "<br>&nbsp;&nbsp;The price is: $" . $provide_info['price'] .
+                        "<br>&nbsp;&nbsp;Not available at this location currently. <br></p>";
                 }
             }
         }
