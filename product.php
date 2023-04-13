@@ -55,6 +55,9 @@ $current_item = $_SESSION['item_name'];
                 }
             }
         }
+        echo "<form name='form' action='' method='post'>
+    Add product to favorites: 
+    <input type='submit' name='new_fav_prod' value='" . $current_item . "' class=><br><br></form>";
     } else {
         "<p> This product does not exist within our database currently. <br></p>";
     }
