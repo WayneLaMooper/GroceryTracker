@@ -229,6 +229,7 @@ $store_info = mysqli_fetch_assoc($result);
             }
         }
         ?>
+        <br>
     </div>
 </body>
 
