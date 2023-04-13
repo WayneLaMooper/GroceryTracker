@@ -56,10 +56,21 @@ $current_item = $_SESSION['item_name'];
             }
         }
         echo "<form name='form' action='' method='post'>
-    Add product to favorites: 
-    <input type='submit' name='new_fav_prod' value='" . $current_item . "' class=><br><br></form>";
+    Add product to favourites: 
+    <input type='submit' name='new_fav_prod' value='" . $current_item . "'class='add-to-favourites-button'><br><br></form>";
     } else {
         "<p> This product does not exist within our database currently. <br></p>";
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] == "POST") {
+        if (isset($_POST['new_fav_prod'])) {
+            $fav_prob = $_POST['new_fav_prod'];
+            $query = "select * from product where name = '$current_item'";
+            $result = mysqli_query($con, $query);
+            $fav_info = mysqli_fetch_assoc($result);
+            $query = "insert into favourites (cust_ID, ser_code) values ($user_data[account_ID], $fav_info[serial_code])";
+            mysqli_query($con, $query);
+        }
     }
     ?>
     <br>
