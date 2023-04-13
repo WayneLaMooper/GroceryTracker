@@ -34,6 +34,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     if ($result && mysqli_num_rows($result) > 0) {
                         header("Location: managerAcc.php");
                         die;
+                    } else {
+                        header("Location: employee.php");
+                        die;
                     }
                 }
             } else {
