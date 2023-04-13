@@ -7,31 +7,76 @@ include("functions.php");
 
 $user_data = check_login($con);
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-  if(isset($_GET['imgSrc']) && isset($_GET['imgCode'])) {
-    $img_src = $_GET['imgSrc'];
-    $img_srl = $_GET['imgCode'];
+// if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+//   if(isset($_GET['imgSrc']) && isset($_GET['imgCode'])) {
+//     $img_src = $_GET['imgSrc'];
+//     $img_srl = $_GET['imgCode'];
 
-    $query = "select * from product where serial_code = '$img_srl'";
+//     $query = "select * from product where serial_code = '$img_srl'";
+//     $result = mysqli_query($con, $query);
+//     $item_data = mysqli_fetch_assoc($result);
+
+//     if ($result && mysqli_num_rows($result) > 0) {
+//       $item_data = mysqli_fetch_assoc($result);
+
+//       if($img_srl === $user_data['serial_code']) {
+//         $_SESSION['i_src'] = $img_src;
+//         $_SESSION['i_code'] = $img_code;
+//         $_SESSION['i_stock'] = $user_data['stock'];
+//         $_SESSION['i_price'] = $user_data['price'];
+//         header("Location: product.php");
+//         die;
+//       }
+//     }
+    
+//   }
+// }
+
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+  $product_name = $_POST['item'];
+  $_SESSION['item_name'] = $product_name;
+
+  if(isset($product_name)) {
+    $query = "select * from product where name = '$product_name'";
     $result = mysqli_query($con, $query);
-    $user_data = mysqli_fetch_assoc($result);
 
     if ($result && mysqli_num_rows($result) > 0) {
-      $user_data = mysqli_fetch_assoc($result);
+      $i = 0;
 
-      if($img_srl === $user_data['serial_code']) {
-        $_SESSION['i_src'] = $img_src;
-        $_SESSION['i_code'] = $img_code;
-        $_SESSION['i_stock'] = $user_data['stock'];
-        $_SESSION['i_price'] = $user_data['price'];
-        header("Location: product.php");
-        die;
+      while ($item_row_data = mysqli_fetch_assoc($result)) {
+        $serial = $item_row_data['serial_code'];
+        $_SESSION['ser_code'][$i] = $serial;
+
+        $query = "select * from provides where serial_code = '$serial'";
+        $result = mysqli_query($con, $query);
+
+        if ($result && mysqli_num_rows($result) > 0) {
+          $j = 0;
+
+          while($provides_row = mysqli_fetch_assoc($result)) {
+            $_SESSION['price'][$j] = $provides_row['price'];
+            $_SESSION['stock'][$j] = $provides_row['stock'];
+            $dept_id = $provides_row['dept_id'];
+            $query = "select * from department where dept_ID = '$dept_id'";
+            $result = mysqli_query($con, $query);
+            
+            if ($result && mysqli_num_rows($result) > 0) {
+              $_SESSION['location'][$j] = $provides_row['shop_location'];
+            }
+
+            $j++;
+          }
+        }
+
+        $i++;
       }
     }
-    
   }
-}
 
+  header("Location: product.php");
+  die;
+
+}
 ?>
 
 
@@ -62,7 +107,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   <div id="search">
     <form method="post">
       <div>Search:</div>
-      <input type="text" name="item"><br>
+      <input type="text" name="item"><
+      <br>
+      <input type="submit" value= "Enter">
+      <br>
     </form>
   </div>
   <br>
@@ -79,30 +127,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   <hr>
   <div class="gallery">
     <figure>
-      <img src="images/apple.jpg" alt = "1" class ="image">
+      <img src="images/apple.jpg" alt = "apple" class ="image">
     </figure>
 
     <figure>
-      <img src="images/orange.jpg" alt = "2" class ="image">
+      <img src="images/orange.jpg" alt = "orange" class ="image">
     </figure>
 
     <figure>
-      <img src="images/banana.jpg" alt = "3" class ="image">
+      <img src="images/banana.jpg" alt = "banana" class ="image">
     </figure>
 
     <figure>
-      <img src="images/flour.jpg" alt = "4" class ="image">
+      <img src="images/flour.jpg" alt = "flour" class ="image">
     </figure>
 
     <figure>
-      <img src="images/eggs.jpg" alt = "5" class ="image">
+      <img src="images/eggs.jpg" alt = "eggs" class ="image">
     </figure>
 
     <figure>
-      <img src="images/butter.jpg" alt = "6" class ="image">
+      <img src="images/butter.jpg" alt = "butter" class ="image">
     </figure>
 
-    <script>
+    <!-- <script>
       var images = document.querySelectorAll('.image');
 
       for (var i = 0; i < images.length; i++) {
@@ -120,7 +168,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         xhttp.send();
         
       }
-    </script>
+    </script> -->
 
   </div>
 </body>

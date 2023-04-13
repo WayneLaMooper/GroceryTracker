@@ -6,10 +6,9 @@ include("connection.php");
 include("functions.php");
 
 $user_data = check_login($con);
-$current_img = $_SESSION['i_src'];
-$current_code = $_SESSION['i_code'];
-$current_price = $_SESSION['i_price'];
-$current_stock = $_SESSION['i_stock'];
+$current_item = $_SESSION['item_name'];
+
+
 ?>
 
 <!DOCTYPE html>
@@ -25,14 +24,12 @@ $current_stock = $_SESSION['i_stock'];
 <body>
 
     <a href="index.php">back to main page</a>
-    <h1>This is the product page </h1>
-    <?php echo '<img src="'. $current_img .'" alt = "">'; ?>
-    <p> Serial code: <?php echo $current_code ?>
-        <br>&nbsp;&nbsp; Price of product: <?php echo $current_price ?>
-        <br>&nbsp;&nbsp; Stock: <?php echo $current_stock ?>
-
-    </p>
-
+    <h1>This is the <?php echo $current_item?> product page </h1>
+    <?php 
+    for ($i = 0; i < count($_SESSION['ser_code']); $i++) {
+        echo "<p> In the location".$_SESSION['location'][$i]. "<br>&nbsp;&nbsp;The price is:" . $_SESSION['price'][$i] . "<br>&nbsp;&nbsp;quantity:".$_SESSION['stock'][$i]. "<br> </p>"; 
+    }
+    ?>
     <br>
     <hr>
 
@@ -43,6 +40,7 @@ $current_stock = $_SESSION['i_stock'];
             <img src="images/apple.jpg">
         </figure>
     </div>
+
 </body>
 
 </html>
