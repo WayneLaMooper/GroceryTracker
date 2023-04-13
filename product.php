@@ -26,8 +26,24 @@ $current_item = $_SESSION['item_name'];
     <a href="index.php">back to main page</a>
     <h1>This is the <?php echo $current_item ?> product page </h1>
     <?php
-    for ($i = 0; $i < count($_SESSION['ser_code']); $i++) {
-        echo "<p> In the location" . $_SESSION['location'][$i] . "<br>&nbsp;&nbsp;The price is:" . $_SESSION['price'][$i] . "<br>&nbsp;&nbsp;quantity:" . $_SESSION['stock'][$i] . "<br> </p>";
+    $query = "select * from product where name = '$current_item'";
+    $result = mysqli_query($con, $query);
+    if ($result && mysqli_num_rows($result) > 0) {
+        while ($product_info = mysqli_fetch_assoc($result)) {
+            $query = "select * from provides where ser_code = $product_info[serial_code]";
+            $provide_results = mysqli_query($con, $query);
+            while ($provide_info = mysqli_fetch_assoc($provide_results)) {
+                $query = "select * from department where dept_ID = $provide_info[dept_id]";
+                $loc_result = mysqli_query($con, $query);
+                $loc_info = mysqli_fetch_assoc($loc_result);
+                echo "<p> Location: " . $loc_info['shop_location'] .
+                    "<br> Department: " . $loc_info['dept_name'] .
+                    "<br>&nbsp;&nbsp;The price is: $" . $provide_info['price'] .
+                    "<br>&nbsp;&nbsp;The quantity is: " . $provide_info['stock'] . "<br></p>";
+            }
+        }
+    } else {
+        "<p> This product does not exist within our database currently. <br></p>";
     }
     ?>
     <br>
