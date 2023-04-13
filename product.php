@@ -46,13 +46,13 @@ $current_item = $_SESSION['item_name'];
                     echo "<p> Location: " . $shop_info['store_name'] . " at " . $loc_info['shop_location'] .
                         "<br> Department: " . $loc_info['dept_name'] .
                         "<br>&nbsp;&nbsp;The regular price is: $" . $provide_info['price'] .
-                        "<br>&nbsp;&nbsp;The discounted price is: $" . $provide_info['price'] * ($provide_info['discount'] / 100) .
+                        "<br>&nbsp;&nbsp;The discounted price is: $" . $provide_info['price'] - ($provide_info['price'] * ($provide_info['discount'] / 100)) .
                         "<br>&nbsp;&nbsp;The quantity is: " . $provide_info['stock'] . "<br></p>";
                 } else {
                     echo "<p> Location: " . $shop_info['store_name'] . " at " . $loc_info['shop_location'] .
                         "<br> Department: " . $loc_info['dept_name'] .
                         "<br>&nbsp;&nbsp;The regular price is: $" . $provide_info['price'] .
-                        "<br>&nbsp;&nbsp;The price is: $" . $provide_info['price'] * ($provide_info['discount'] / 100) .
+                        "<br>&nbsp;&nbsp;The price is: $" . $provide_info['price'] - ($provide_info['price'] * ($provide_info['discount'] / 100)) .
                         "<br>&nbsp;&nbsp;Not available at this location currently. <br></p>";
                 }
             }
