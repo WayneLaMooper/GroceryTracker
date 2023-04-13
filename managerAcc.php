@@ -76,6 +76,31 @@ $store_info = mysqli_fetch_assoc($result);
             }
             ?>
         </div>
+        <div class="divider">
+            <form method="post">
+                <br>
+                <div>Can't find a product in our database? Add it!</div>
+                <br>
+                <div>Product name:</div>
+                <input type="text" name="p_name"><br>
+                <br>
+                <input type="submit" value="Add Product"><br>
+            </form><br>
+            <?php
+            if ($_SERVER['REQUEST_METHOD'] == "POST") {
+                if (isset($_POST['p_name'])) {
+                    $new_pname = $_POST['p_name'];
+                    $new_serial = random_num(20);
+                    if (!empty($new_pname)) {
+                        $query = "insert into product (serial_code, name) values ('$new_serial', '$new_pname')";
+                        mysqli_query($con, $query);
+                    } else {
+                        echo "Empty entry, please try again.";
+                    }
+                }
+            }
+            ?>
+        </div>
     </div>
     <div class="column-style">
         <h1>Unassigned Employees:</h1>
@@ -165,6 +190,38 @@ $store_info = mysqli_fetch_assoc($result);
     </div>
     <div class="column-style">
         <h1>Products:</h1>
+        <?php
+        $query = "select * from product";
+        $result = mysqli_query($con, $query);
+        while ($product_info = mysqli_fetch_assoc($result)) {
+            $query = "select * from provides where dept_id = $manager_info[dept_ID] and ser_code = $product_info[serial_code]";
+            $productResults = mysqli_query($con, $query);
+            if ($productResults && mysqli_num_rows($productResults) > 0) {
+                echo "<div class='divider'>" . $product_info['name'] . "<br>" . $product_info['serial_code'] .
+                    "<br> This product is in your department now. </div>";
+            } else {
+                $query = "select * from provides as p natural join department as d where d.shop_location = '$manager_info[shop_location]' and p.ser_code = '$product_info[serial_code]'";
+                $sameloc_Result = mysqli_query($con, $query);
+                if ($sameloc_Result && mysqli_num_rows($sameloc_Result)) {
+                    echo "<div class='divider'>" . $product_info['name'] . "<br>" . $product_info['serial_code'] .
+                        "<br> This product is already under another department. </div>";
+                } else {
+                    echo "<div class='divider'>" . $product_info['name'] . "<br>" . $product_info['serial_code'] . "<br>
+                    <form name='form' action='' method='post'>
+                    Add product to department: 
+                    <input type='submit' name='new_dept_prod' value='" . $product_info['serial_code'] . "'><br><br></form></div>";
+                }
+            }
+        }
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            if (isset($_POST['new_dept_prod'])) {
+                $prod_code = $_POST['new_dept_prod'];
+                $query = "insert into provides (ser_code, dept_id) values ('$prod_code', '$manager_info[dept_ID]')";
+                mysqli_query($con, $query);
+                header("refresh: 0");
+            }
+        }
+        ?>
     </div>
 </body>
 
