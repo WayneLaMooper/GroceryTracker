@@ -39,10 +39,19 @@ $current_item = $_SESSION['item_name'];
                 $query = "select * from department where dept_ID = $provide_info[dept_id]";
                 $loc_result = mysqli_query($con, $query);
                 $loc_info = mysqli_fetch_assoc($loc_result);
-                echo "<p> Location: " . $loc_info['shop_location'] .
-                    "<br> Department: " . $loc_info['dept_name'] .
-                    "<br>&nbsp;&nbsp;The price is: $" . $provide_info['price'] .
-                    "<br>&nbsp;&nbsp;The quantity is: " . $provide_info['stock'] . "<br></p>";
+                $query = "select * from shop where location = '$loc_info[shop_location]'";
+                $shop_result = mysqli_query($con, $query);
+                $shop_info = mysqli_fetch_assoc($shop_result);
+                if ($provide_info['stock'] > 0) {
+                    echo "<p> Location: " . $shop_info['store_name'] . " at " . $loc_info['shop_location'] .
+                        "<br> Department: " . $loc_info['dept_name'] .
+                        "<br>&nbsp;&nbsp;The price is: $" . $provide_info['price'] .
+                        "<br>&nbsp;&nbsp;The quantity is: " . $provide_info['stock'] . "<br></p>";
+                } else {
+                    echo "<p> Location: " . $shop_info['store_name'] . " at " . $loc_info['shop_location'] .
+                        "<br> Department: " . $loc_info['dept_name'] .
+                        "<br>&nbsp;&nbsp;The price is: $" . $provide_info['price'] . "<br></p>";
+                }
             }
         }
     } else {
