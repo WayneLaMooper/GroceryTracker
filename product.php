@@ -65,7 +65,7 @@ $current_item = $_SESSION['item_name'];
     <hr>
     <div class="gallery">
         <figure>
-            <img src="images/apple.jpg">
+            <img src="images/shopping cart.jpg">
         </figure>
     </div>
 
