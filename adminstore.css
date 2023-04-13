@@ -17,6 +17,8 @@ body{
     border-style: solid;
     border-radius: 10%;
     border-color: whitesmoke;
+    border-bottom-left-radius: 5%;
+    border-bottom-right-radius: 5%;
     margin-top: 10%;
     margin-right: 5%;
     margin-left: 5%;
@@ -49,6 +51,33 @@ body{
     border-top-color: black;
     border-bottom-color: black;
     border-color: black;
+}
+
+.maybe-prod-divider{
+    text-align: right;
+    border-style: solid;
+    border-top-color: black;
+    border-bottom-color: black;
+    border-color: black;
+    background-image: linear-gradient(goldenrod, darkgrey);
+}
+
+.not-prod-divider{
+    text-align: right;
+    border-style: solid;
+    border-top-color: black;
+    border-bottom-color: black;
+    border-color: black;
+    background-image: linear-gradient(darkred, darkgrey);
+}
+
+.prod-divider{
+    text-align: right;
+    border-style: solid;
+    border-top-color: black;
+    border-bottom-color: black;
+    border-color: black;
+    background-image: linear-gradient(darkolivegreen, darkgrey);
 }
 
 img {

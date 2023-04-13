@@ -197,16 +197,23 @@ $store_info = mysqli_fetch_assoc($result);
             $query = "select * from provides where dept_id = $manager_info[dept_ID] and ser_code = $product_info[serial_code]";
             $productResults = mysqli_query($con, $query);
             if ($productResults && mysqli_num_rows($productResults) > 0) {
-                echo "<div class='divider'>" . $product_info['name'] . "<br>" . $product_info['serial_code'] .
-                    "<br> This product is in your department now. </div>";
+                echo "<div class='prod-divider'>" . $product_info['name'] . "<br>" . $product_info['serial_code'] .
+                    "<br> This product is in your department now. 
+                    <form name='form' action='' method='post'>
+                    Stock:    <input type='text' name='update_prod_stock' value='0'><br>
+                    Price:    <input type='text' name='update_prod_price' value='0'><br>
+                    Discount: <input type='text' name='update_prod_discount' value='0'><br>
+                    Update product info: 
+                    <input type='submit' name='update_prod_info' value='" . $product_info['serial_code'] . "'><br><br></form>
+                    </div>";
             } else {
                 $query = "select * from provides as p natural join department as d where d.shop_location = '$manager_info[shop_location]' and p.ser_code = '$product_info[serial_code]'";
                 $sameloc_Result = mysqli_query($con, $query);
                 if ($sameloc_Result && mysqli_num_rows($sameloc_Result)) {
-                    echo "<div class='divider'>" . $product_info['name'] . "<br>" . $product_info['serial_code'] .
-                        "<br> This product is already under another department. </div>";
+                    echo "<div class='not-prod-divider'>" . $product_info['name'] . "<br>" . $product_info['serial_code'] .
+                        "<br> This product is already under another department.</div>";
                 } else {
-                    echo "<div class='divider'>" . $product_info['name'] . "<br>" . $product_info['serial_code'] . "<br>
+                    echo "<div class='maybe-prod-divider'>" . $product_info['name'] . "<br>" . $product_info['serial_code'] . "<br>
                     <form name='form' action='' method='post'>
                     Add product to department: 
                     <input type='submit' name='new_dept_prod' value='" . $product_info['serial_code'] . "'><br><br></form></div>";
